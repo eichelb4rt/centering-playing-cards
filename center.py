@@ -65,7 +65,6 @@ def accumulate(edge_image, edges_x, edges_y):
 def detect_lines(acc, n):
     # Gaussian smoothing
     acc = scipy.ndimage.convolve(acc, GAUSS_FILTER, mode='constant', cval=0)
-
     # Detect lines with non-maximum suppression
     lines = []
     while (len(lines) < n) and np.any(acc):
@@ -74,7 +73,6 @@ def detect_lines(acc, n):
         lines.append(i)
         # Eliminate non-maxima in the local neighborhood
         acc[max(0, i - ACCU_NMP_RADIUS):i + ACCU_NMP_RADIUS] = 0
-
     return lines
 
 
