@@ -20,7 +20,7 @@ EXCEPTIONS = {
     "e-Z": (3, 3),
     "s-6": (3, 5),
     "s-U": (3, 5),
-    "b": (3, 5)
+    "b": (2, 5)
 }
 
 
@@ -38,7 +38,7 @@ MIN_RATIO = 2
 
 # line detection
 # gauss filter radius
-ACCU_FILTER_SIZE = 3
+ACCU_FILTER_SIZE = 21
 # radius of nearest neighbours getting eliminated
 ACCU_NMP_RADIUS = 100
 
@@ -80,8 +80,9 @@ def center(original_image, n_vertical=2, n_horizontal=3):
     image = grayscale(original_image)
     image = np.asarray(image, dtype=np.float32) / 255
 
-    edges_x = scipy.ndimage.convolve(image, SOBEL_X)
-    edges_y = scipy.ndimage.convolve(image, SOBEL_Y)
+    # we're not interested in the direction (sign) of the horizontal/vertical change
+    edges_x = np.abs(scipy.ndimage.convolve(image, SOBEL_X))
+    edges_y = np.abs(scipy.ndimage.convolve(image, SOBEL_Y))
     edge_image = np.sqrt(edges_x ** 2 + edges_y ** 2)
 
     # detect vertical and horizontal lines
