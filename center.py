@@ -17,9 +17,6 @@ OUTPUT_DIR = "straight_faces"
 STANDARD_N_VERTICAL = 2
 STANDARD_N_HORIZONTAL = 3
 EXCEPTIONS = {
-    "e-Z": (3, 3),
-    "s-6": (3, 5),
-    "s-U": (3, 5),
     "b": (2, 5)
 }
 
